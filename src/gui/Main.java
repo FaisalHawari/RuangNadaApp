@@ -5,7 +5,7 @@
  */
 package gui;
 
-import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -106,19 +106,23 @@ public class Main extends javax.swing.JFrame {
         panelBorder1.repaint();
     }
     
-    public void updateMenu(boolean isAdmin) {
-    jBtnHome.setVisible(true);
-    jBtnTampilData.setVisible(isAdmin);
-    jBtnKelolaData.setVisible(isAdmin);
-    jBtnKeluar.setVisible(true);
+    public void loginSebagaiAdmin() {
+        jBtnBundle.setVisible(false);
+        jBtnCustom.setVisible(false);
+        jBtnTampilData.setVisible(true);
+        jBtnKelolaData.setVisible(true);
+        jBtnLogout.setVisible(true);
+        jBtnAdmin.setVisible(false); // Sembunyikan tombol login admin setelah login
+    }
 
-    // Sembunyikan fitur user biasa
-    jBtnBundle.setVisible(false);
-    jBtnCustom.setVisible(false);
-    jBtnAdmin.setVisible(false);
-    
-    setMenuView();
-}
+    public void logoutAdmin() {
+        jBtnBundle.setVisible(true);
+        jBtnCustom.setVisible(true);
+        jBtnTampilData.setVisible(false);
+        jBtnKelolaData.setVisible(false);
+        jBtnLogout.setVisible(false);
+        jBtnAdmin.setVisible(true); // Tampilkan kembali tombol login admin
+    }
     
     public Main() {
         initComponents();
@@ -126,6 +130,7 @@ public class Main extends javax.swing.JFrame {
         setMenuView();
         jBtnTampilData.setVisible(false);
         jBtnKelolaData.setVisible(false);
+        jBtnLogout.setVisible(false);
         
 
     }
@@ -150,6 +155,7 @@ public class Main extends javax.swing.JFrame {
         jBtnAdmin = new javax.swing.JButton();
         jBtnTampilData = new javax.swing.JButton();
         jBtnKelolaData = new javax.swing.JButton();
+        jBtnLogout = new javax.swing.JButton();
         panelBorder1 = new components.PanelBorder();
 
         javax.swing.GroupLayout menuPanel1Layout = new javax.swing.GroupLayout(menuPanel1);
@@ -262,6 +268,18 @@ public class Main extends javax.swing.JFrame {
         });
         menuPanel2.add(jBtnKelolaData, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 190, 50));
 
+        jBtnLogout.setBackground(new java.awt.Color(20, 9, 25));
+        jBtnLogout.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jBtnLogout.setForeground(new java.awt.Color(180, 180, 184));
+        jBtnLogout.setText("LOGOUT");
+        jBtnLogout.setBorderPainted(false);
+        jBtnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnLogoutActionPerformed(evt);
+            }
+        });
+        menuPanel2.add(jBtnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 600, 190, 50));
+
         panelBorder3.add(menuPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 770));
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
@@ -331,8 +349,9 @@ public class Main extends javax.swing.JFrame {
 
     private void jBtnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdminActionPerformed
         // TODO add your handling code here:
-        LoginAdmin login = new LoginAdmin(this, true);
+        LoginAdmin login = new LoginAdmin(this, true); // kirim Main sebagai parent
         login.setVisible(true);
+        
     }//GEN-LAST:event_jBtnAdminActionPerformed
 
     private void jBtnTampilDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnTampilDataActionPerformed
@@ -353,13 +372,29 @@ public class Main extends javax.swing.JFrame {
         setFormEditDataView();
     }//GEN-LAST:event_jBtnKelolaDataActionPerformed
 
+    private void jBtnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnLogoutActionPerformed
+        // TODO add your handling code here:
+        int jawab = JOptionPane.showConfirmDialog(
+            null,
+            "Yakin ingin logout?",
+            "Konfirmasi",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE
+        );
+
+        if (jawab == JOptionPane.YES_OPTION) {
+            logoutAdmin(); // kembali ke menu biasa
+            setMenuView(); // kembali ke home
+        }
+    }//GEN-LAST:event_jBtnLogoutActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         try {
-            UIManager.setLookAndFeel( new FlatLightLaf() );
+            UIManager.setLookAndFeel( new FlatDarkLaf() );
         } catch( Exception ex ) {
             System.err.println( "Failed to initialize LaF" );
         }
@@ -380,6 +415,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jBtnHome;
     private javax.swing.JButton jBtnKelolaData;
     private javax.swing.JButton jBtnKeluar;
+    private javax.swing.JButton jBtnLogout;
     private javax.swing.JButton jBtnTampilData;
     private javax.swing.JLabel jLabel1;
     private components.MenuPanel menuPanel1;

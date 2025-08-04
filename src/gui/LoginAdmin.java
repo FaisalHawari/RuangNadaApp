@@ -15,13 +15,10 @@ import javax.swing.JOptionPane;
 public class LoginAdmin extends javax.swing.JDialog {
 
     /** Creates new form LoginAdmin */
-    private Main parentFrame;
     
-    public LoginAdmin(Main parent, boolean modal) {
+    public LoginAdmin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.parentFrame = parent;
-        this.setLocationRelativeTo(parent);
     }
 
     /** This method is called from within the constructor to
@@ -63,26 +60,24 @@ public class LoginAdmin extends javax.swing.JDialog {
         getContentPane().add(jTextPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 200, 40));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnLoginActionPerformed
         // TODO add your handling code here:
-        // Mengambil input username dan password
-    String username = jTextUsername.getText();
-    String password = new String(jTextPassword.getPassword());
+        String username = jTextUsername.getText();
+        String password = new String(jTextPassword.getPassword());
 
-    // Logika verifikasi (hardcoded)
-    if (username.equals("admin") && password.equals("admin123")) {
-        JOptionPane.showMessageDialog(this, "Login berhasil!", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+        if (username.equals("admin") && password.equals("admin123")) {
+            JOptionPane.showMessageDialog(this, "Login Berhasil!", "Sukses", JOptionPane.INFORMATION_MESSAGE);
 
-        // Memanggil method di Main untuk menampilkan menu admin
-        parentFrame.updateMenu(true); 
+            // Panggil Main dan ubah menu
+            ((Main) getParent()).loginSebagaiAdmin();
 
-        // Menutup form login
-        this.dispose(); 
-    } else {
-        JOptionPane.showMessageDialog(this, "Username atau password salah!", "Login Gagal", JOptionPane.ERROR_MESSAGE);
-    }
+            dispose(); // Tutup dialog login
+        } else {
+            JOptionPane.showMessageDialog(this, "Username atau Password salah!", "Login Gagal", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jBtnLoginActionPerformed
 
     /**
