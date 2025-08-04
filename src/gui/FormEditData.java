@@ -27,6 +27,24 @@ public class FormEditData extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTxtDurasi = new javax.swing.JPanel();
+        jBtnCancelBook = new javax.swing.JButton();
+        jBtnUpdate = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jTxtNamaPemesan1 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jTxtTanggalPesan1 = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jTxtJam1 = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jTxtPaket = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jTxtJenis = new javax.swing.JTextField();
+        jTxtDurasi3 = new javax.swing.JTextField();
         jBtnCari = new javax.swing.JButton();
         jTxtMasukanKode = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -34,6 +52,89 @@ public class FormEditData extends javax.swing.JPanel {
         setBackground(new java.awt.Color(5, 2, 5));
         setPreferredSize(new java.awt.Dimension(830, 770));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTxtDurasi.setBackground(new java.awt.Color(14, 3, 20));
+        jTxtDurasi.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detail Pesanan", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Semibold", 0, 19), new java.awt.Color(255, 255, 255))); // NOI18N
+        jTxtDurasi.setForeground(new java.awt.Color(255, 255, 255));
+        jTxtDurasi.setFont(new java.awt.Font("Segoe UI Semibold", 0, 19)); // NOI18N
+        jTxtDurasi.setName("Detail Pesanan"); // NOI18N
+        jTxtDurasi.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jBtnCancelBook.setFont(new java.awt.Font("Segoe UI Semibold", 0, 19)); // NOI18N
+        jBtnCancelBook.setText("Batalkan Pesanan");
+        jBtnCancelBook.setPreferredSize(new java.awt.Dimension(185, 35));
+        jBtnCancelBook.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnCancelBookMouseClicked(evt);
+            }
+        });
+        jTxtDurasi.add(jBtnCancelBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 640, 230, -1));
+
+        jBtnUpdate.setFont(new java.awt.Font("Segoe UI Semibold", 0, 19)); // NOI18N
+        jBtnUpdate.setText("Update");
+        jTxtDurasi.add(jBtnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 640, 120, -1));
+
+        jLabel9.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel9.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Nama : ");
+        jTxtDurasi.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, -1, -1));
+        jTxtDurasi.add(jTxtNamaPemesan1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 280, 38));
+
+        jLabel10.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel10.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Tanggal (dd/mm/yy) : ");
+        jTxtDurasi.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, -1, -1));
+        jTxtDurasi.add(jTxtTanggalPesan1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 120, 280, 38));
+
+        jLabel11.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel11.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Jam (hh:mm) : ");
+        jTxtDurasi.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, -1, -1));
+        jTxtDurasi.add(jTxtJam1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 280, 38));
+
+        jLabel12.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel12.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Durasi :");
+        jTxtDurasi.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, -1, -1));
+        jTxtDurasi.add(jTxtPaket, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 360, 280, 38));
+
+        jLabel13.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel13.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Paket : ");
+        jTxtDurasi.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, -1, -1));
+
+        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Makan dan Minum :");
+        jTxtDurasi.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 420, -1, -1));
+
+        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Jenis Ruangan : ");
+        jTxtDurasi.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, -1, -1));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jTxtDurasi.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 420, 290, 150));
+        jTxtDurasi.add(jTxtJenis, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 300, 280, 38));
+
+        jTxtDurasi3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTxtDurasi3ActionPerformed(evt);
+            }
+        });
+        jTxtDurasi.add(jTxtDurasi3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 240, 280, 38));
+
+        add(jTxtDurasi, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 780, 710));
 
         jBtnCari.setFont(new java.awt.Font("Segoe UI Semibold", 0, 19)); // NOI18N
         jBtnCari.setText("Cari");
@@ -47,19 +148,19 @@ public class FormEditData extends javax.swing.JPanel {
                 jBtnCariActionPerformed(evt);
             }
         });
-        add(jBtnCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 55, -1, -1));
+        add(jBtnCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, -1, -1));
 
         jTxtMasukanKode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTxtMasukanKodeActionPerformed(evt);
             }
         });
-        add(jTxtMasukanKode, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, 264, -1));
+        add(jTxtMasukanKode, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, 264, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 19)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(231, 219, 239));
         jLabel2.setText("Masukan Kode Booking : ");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 55, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnCari(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnCari
@@ -74,10 +175,36 @@ public class FormEditData extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtMasukanKodeActionPerformed
 
+    private void jBtnCancelBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnCancelBookMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnCancelBookMouseClicked
+
+    private void jTxtDurasi3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtDurasi3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtDurasi3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtnCancelBook;
     private javax.swing.JButton jBtnCari;
+    private javax.swing.JButton jBtnUpdate;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JPanel jTxtDurasi;
+    private javax.swing.JTextField jTxtDurasi3;
+    private javax.swing.JTextField jTxtJam1;
+    private javax.swing.JTextField jTxtJenis;
     private javax.swing.JTextField jTxtMasukanKode;
+    private javax.swing.JTextField jTxtNamaPemesan1;
+    private javax.swing.JTextField jTxtPaket;
+    private javax.swing.JTextField jTxtTanggalPesan1;
     // End of variables declaration//GEN-END:variables
 }

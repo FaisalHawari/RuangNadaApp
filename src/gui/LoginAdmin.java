@@ -37,6 +37,7 @@ public class LoginAdmin extends javax.swing.JDialog {
         jTextPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Login Admin");
         setBackground(new java.awt.Color(5, 2, 5));
         setPreferredSize(new java.awt.Dimension(420, 320));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -57,6 +58,12 @@ public class LoginAdmin extends javax.swing.JDialog {
             }
         });
         getContentPane().add(jBtnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 100, 50));
+
+        jTextPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextPasswordActionPerformed(evt);
+            }
+        });
         getContentPane().add(jTextPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 200, 40));
 
         pack();
@@ -79,6 +86,10 @@ public class LoginAdmin extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Username atau Password salah!", "Login Gagal", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jBtnLoginActionPerformed
+
+    private void jTextPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextPasswordActionPerformed
 
     /**
      * @param args the command line arguments

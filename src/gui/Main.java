@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package gui;
 
 import com.formdev.flatlaf.FlatDarkLaf;
@@ -12,10 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-/**
- *
- * @author fahaw
- */
+
 public class Main extends javax.swing.JFrame {
 
     /**
@@ -29,6 +22,8 @@ public class Main extends javax.swing.JFrame {
     private DaftarDataBooking dataBooking;
     private FormEditData formEdit;
     
+    
+    //mengatur panel di sebelah kanan 
     public void setMenuView(){
         if(menuView == null){
             menuView = new MenuView(this);
@@ -112,7 +107,7 @@ public class Main extends javax.swing.JFrame {
         jBtnTampilData.setVisible(true);
         jBtnKelolaData.setVisible(true);
         jBtnLogout.setVisible(true);
-        jBtnAdmin.setVisible(false); // Sembunyikan tombol login admin setelah login
+        jBtnAdmin.setVisible(false);
     }
 
     public void logoutAdmin() {
@@ -121,11 +116,12 @@ public class Main extends javax.swing.JFrame {
         jBtnTampilData.setVisible(false);
         jBtnKelolaData.setVisible(false);
         jBtnLogout.setVisible(false);
-        jBtnAdmin.setVisible(true); // Tampilkan kembali tombol login admin
+        jBtnAdmin.setVisible(true);
     }
     
     public Main() {
         initComponents();
+        //tranparankan frame bawaaan
         setBackground(new Color(0, 0, 0, 0));
         setMenuView();
         jBtnTampilData.setVisible(false);
