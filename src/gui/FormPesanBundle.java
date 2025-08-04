@@ -10,18 +10,20 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-
+import controller.BookingController;
+import model.Booking;
+import javax.swing.JOptionPane;
 /**
  *
  * @author fahaw
  */
 public class FormPesanBundle extends javax.swing.JPanel {
 
-    /**
-     * Creates new form FormPesanBundle
-     */
+    private final BookingController controller;
+
     public FormPesanBundle() {
         initComponents();
+        controller = new BookingController();
         setOpaque(false);
     }
 
@@ -187,11 +189,89 @@ public class FormPesanBundle extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        jTextNama.setText("");
+        jTextNoTelp.setText("");
+        jTextTanggal.setText("");
+        jTextJam.setText("");
+        jTextDurasi.setText("");
+        jCmbBundle.setSelectedIndex(0);
+        jChBoxIceTea.setSelected(false);
+        jChBoxFishnChip.setSelected(false);
+        jChBoxMangoJuice.setSelected(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        if (jTextNama.getText().trim().isEmpty() || jTextNoTelp.getText().trim().isEmpty() ||
+            jTextTanggal.getText().trim().isEmpty() || jTextJam.getText().trim().isEmpty() ||
+            jTextDurasi.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Semua field data diri harus diisi!", "Input Tidak Lengkap", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+            int durasi = Integer.parseInt(jTextDurasi.getText());
+            if (durasi <= 0) {
+                JOptionPane.showMessageDialog(this, "Durasi harus lebih dari 0!", "Input Tidak Valid", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            Booking booking = new Booking();
+            booking.setNama(jTextNama.getText());
+            booking.setTlp(jTextNoTelp.getText());
+            booking.setTgl(jTextTanggal.getText());
+            booking.setJam(jTextJam.getText());
+            booking.setDurasi(durasi);
+            booking.setJenis("Bundle");
+            
+            String selectedBundle = (String) jCmbBundle.getSelectedItem();
+            booking.setDetail(selectedBundle);
+
+            int totalHarga = 0;
+            String fnbBundle = "";
+
+            switch (selectedBundle) {
+                case "Family 1":
+                    totalHarga = 120000;
+                    fnbBundle = "Room Small (2 Jam), 1 Pitcher Ice Tea, 1 Calamary, 1 Fish n Chip";
+                    break;
+                case "Family 2":
+                    totalHarga = 175000;
+                    fnbBundle = "Room Medium (2 Jam), 1 Pitcher Ice Tea, 2 Glass Mango Juice, 1 Calamary, 1 Fish n Chip";
+                    break;
+                case "Family 3":
+                    totalHarga = 250000;
+                    fnbBundle = "Room Large (2 Jam), 2 Pitcher Ice Tea, 2 Mix Platter";
+                    break;
+                case "Family 4":
+                    totalHarga = 350000;
+                    fnbBundle = "Room VIP (2 Jam), 2 Pitcher Orange Juice, 2 Mix Platter";
+                    break;
+            }
+
+            StringBuilder fnbTambahan = new StringBuilder();
+            if (jChBoxIceTea.isSelected()) { fnbTambahan.append("Ice Tea, "); totalHarga += 10000; }
+            if (jChBoxFishnChip.isSelected()) { fnbTambahan.append("Fish n Chip, "); totalHarga += 25000; }
+            if (jChBoxMangoJuice.isSelected()) { fnbTambahan.append("Mango Juice, "); totalHarga += 15000; }
+            
+            if (fnbTambahan.length() > 0) {
+                booking.setFnd(fnbBundle + " | Tambahan: " + fnbTambahan.substring(0, fnbTambahan.length() - 2));
+            } else {
+                booking.setFnd(fnbBundle);
+            }
+            booking.setTotal(totalHarga);
+
+            String kodeBooking = controller.createBooking(booking);
+            
+            if (kodeBooking != null) {
+                JOptionPane.showMessageDialog(this, "Booking bundle berhasil! Simpan kode booking Anda:\n" + kodeBooking, "Sukses", JOptionPane.INFORMATION_MESSAGE);
+                jButton1ActionPerformed(null); // Panggil aksi reset
+            } else {
+                JOptionPane.showMessageDialog(this, "Gagal melakukan booking!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Input durasi harus berupa angka!", "Input Tidak Valid", JOptionPane.WARNING_MESSAGE);
+        }                 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jChBoxIceTeaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChBoxIceTeaActionPerformed

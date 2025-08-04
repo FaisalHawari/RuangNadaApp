@@ -5,18 +5,25 @@
  */
 package gui;
 
+import controller.BookingController;
+import model.Booking;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author fahaw
  */
 public class FormPesanCustom extends javax.swing.JPanel {
 
-    /**
-     * Creates new form FormPesanCustom
-     */
+    private final BookingController controller;
+
     public FormPesanCustom() {
         initComponents();
+        controller = new BookingController();
     }
+
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -167,11 +174,87 @@ public class FormPesanCustom extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        jTextNama.setText("");
+        jTextNoTelp.setText("");
+        jTextTanggal.setText("");
+        jTextJam.setText("");
+        jTextDurasi.setText("");
+        jCmbRoom.setSelectedIndex(0);
+        jChBoxIceTea.setSelected(false);
+        jChBoxFishnChip.setSelected(false);
+        jChBoxMangoJuice.setSelected(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        // Langkah 1: Validasi input (dilakukan di dalam View)
+        if (jTextNama.getText().trim().isEmpty() || 
+            jTextNoTelp.getText().trim().isEmpty() ||
+            jTextTanggal.getText().trim().isEmpty() ||
+            jTextJam.getText().trim().isEmpty() ||
+            jTextDurasi.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Semua field data diri harus diisi!", "Input Tidak Lengkap", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        try {
+            int durasi = Integer.parseInt(jTextDurasi.getText());
+            if (durasi <= 0) {
+                JOptionPane.showMessageDialog(this, "Durasi harus lebih dari 0!", "Input Tidak Valid", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // Langkah 2: Buat objek model 'Booking' dan isi dengan data dari form
+            Booking booking = new Booking();
+            booking.setNama(jTextNama.getText());
+            booking.setTlp(jTextNoTelp.getText());
+            booking.setTgl(jTextTanggal.getText());
+            booking.setJam(jTextJam.getText());
+            booking.setDurasi(durasi);
+            booking.setJenis("Custom");
+            booking.setDetail((String) jCmbRoom.getSelectedItem());
+            
+            // Logika kalkulasi harga dan F&B
+            StringBuilder fnb = new StringBuilder();
+            int totalHarga = 0;
+            
+            switch(booking.getDetail()) {
+                case "Small": totalHarga += 35000 * durasi; break;
+                case "Medium": totalHarga += 50000 * durasi; break;
+                case "Large": totalHarga += 80000 * durasi; break;
+                case "VIP": totalHarga += 125000 * durasi; break;
+            }
+            
+            if (jChBoxIceTea.isSelected()) { fnb.append("Ice Tea, "); totalHarga += 10000; }
+            if (jChBoxFishnChip.isSelected()) { fnb.append("Fish n Chip, "); totalHarga += 25000; }
+            if (jChBoxMangoJuice.isSelected()) { fnb.append("Mango Juice, "); totalHarga += 15000; }
+
+            // Hapus koma terakhir jika ada
+            booking.setFnd(fnb.length() > 0 ? fnb.substring(0, fnb.length() - 2) : "Tidak ada");
+            booking.setTotal(totalHarga);
+            
+            // Langkah 3: Kirim objek 'booking' yang sudah lengkap ke controller
+            String kodeBooking = controller.createBooking(booking);
+            
+            // Langkah 4: Tampilkan hasil ke pengguna
+            if (kodeBooking != null) {
+                JOptionPane.showMessageDialog(this, "Booking berhasil! Simpan kode booking Anda:\n" + kodeBooking, "Sukses", JOptionPane.INFORMATION_MESSAGE);
+                // Kosongkan field setelah berhasil
+                jTextNama.setText("");
+                jTextNoTelp.setText("");
+                jTextTanggal.setText("");
+                jTextJam.setText("");
+                jTextDurasi.setText("");
+                jCmbRoom.setSelectedIndex(0);
+                jChBoxIceTea.setSelected(false);
+                jChBoxFishnChip.setSelected(false);
+                jChBoxMangoJuice.setSelected(false);
+            } else {
+                JOptionPane.showMessageDialog(this, "Gagal melakukan booking! Periksa koneksi dan log server.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Input durasi harus berupa angka!", "Input Tidak Valid", JOptionPane.WARNING_MESSAGE);
+        }               
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jChBoxMangoJuiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChBoxMangoJuiceActionPerformed

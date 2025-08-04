@@ -10,21 +10,74 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import controller.BookingController;
+import model.Booking;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 /**
  *
  * @author fahaw
  */
 public class DaftarDataBooking extends javax.swing.JPanel {
+private BookingController controller;
+    private DefaultTableModel model;
 
-    /**
-     * Creates new form DaftarDataBooking
-     */
-    private Main main;
-    
     public DaftarDataBooking() {
         initComponents();
-        this.main = main;
+        controller = new BookingController();
+        initTableModel();
+        loadTableData();
+
+        // Tambahkan listener untuk me-refresh data saat panel ini ditampilkan
+        this.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent e) {
+                loadTableData();
+            }
+        });
+    }
+     private void initTableModel() {
+        model = new DefaultTableModel();
+        model.addColumn("Id");
+        model.addColumn("Kode");
+        model.addColumn("Nama");
+        model.addColumn("Telp");
+        model.addColumn("Tgl");
+        model.addColumn("Jam");
+        model.addColumn("Durasi (Jam)");
+        model.addColumn("Jenis");
+        model.addColumn("Detail");
+        model.addColumn("F&D");
+        model.addColumn("Total (Rp)");
+        
+        jTable1.setModel(model);
+    }
+
+    
+    public void loadTableData() {
+        model.setRowCount(0); // Kosongkan tabel sebelum diisi
+
+        List<Booking> bookings = controller.getAllBookings();
+        if (bookings != null) {
+            for (Booking b : bookings) {
+                model.addRow(new Object[]{
+                    b.getId(), 
+                    b.getKode(), 
+                    b.getNama(), 
+                    b.getTlp(),
+                    b.getTgl(), 
+                    b.getJam(), 
+                    b.getDurasi(), 
+                    b.getJenis(),
+                    b.getDetail(), 
+                    b.getFnd(), 
+                    b.getTotal()
+                });
+            }
+        }
     }
     
     @Override
@@ -62,6 +115,10 @@ public class DaftarDataBooking extends javax.swing.JPanel {
         jTable1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null},

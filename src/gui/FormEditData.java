@@ -5,17 +5,21 @@
  */
 package gui;
 
+import controller.BookingController;
+import model.Booking;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author fahaw
  */
 public class FormEditData extends javax.swing.JPanel {
 
-    /**
-     * Creates new form FormEditData
-     */
+    private BookingController controller;
+
     public FormEditData() {
         initComponents();
+        controller = new BookingController();
     }
 
     /**
@@ -72,6 +76,11 @@ public class FormEditData extends javax.swing.JPanel {
 
         jBtnUpdate.setFont(new java.awt.Font("Segoe UI Semibold", 0, 19)); // NOI18N
         jBtnUpdate.setText("Update");
+        jBtnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnUpdateActionPerformed(evt);
+            }
+        });
         jTxtDurasi.add(jBtnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 640, 120, -1));
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
@@ -168,7 +177,20 @@ public class FormEditData extends javax.swing.JPanel {
     }//GEN-LAST:event_jBtnCari
 
     private void jBtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCariActionPerformed
-        // TODO add your handling code here:
+        String kode = jTxtMasukanKode.getText();
+        Booking booking = controller.getBookingByCode(kode);
+        
+        if (booking != null) {
+            jTxtNamaPemesan1.setText(booking.getNama());
+            jTxtTanggalPesan1.setText(booking.getTgl());
+            jTxtJam1.setText(booking.getJam());
+            jTxtDurasi3.setText(String.valueOf(booking.getDurasi()));
+            jTxtJenis.setText(booking.getJenis());
+            jTxtPaket.setText(booking.getDetail());
+            jTextArea1.setText(booking.getFnd());
+        } else {
+            JOptionPane.showMessageDialog(this, "Data tidak ditemukan!");
+        }
     }//GEN-LAST:event_jBtnCariActionPerformed
 
     private void jTxtMasukanKodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtMasukanKodeActionPerformed
@@ -176,12 +198,38 @@ public class FormEditData extends javax.swing.JPanel {
     }//GEN-LAST:event_jTxtMasukanKodeActionPerformed
 
     private void jBtnCancelBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnCancelBookMouseClicked
-        // TODO add your handling code here:
+        int response = JOptionPane.showConfirmDialog(this, "Yakin ingin menghapus data ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        if (response == JOptionPane.YES_OPTION) {
+            if (controller.deleteBooking(jTxtMasukanKode.getText())) {
+                JOptionPane.showMessageDialog(this, "Data berhasil dihapus!");
+                // Clear fields
+            } else {
+                JOptionPane.showMessageDialog(this, "Gagal menghapus data!");
+            }
+        }
     }//GEN-LAST:event_jBtnCancelBookMouseClicked
 
     private void jTxtDurasi3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtDurasi3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtDurasi3ActionPerformed
+
+    private void jBtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnUpdateActionPerformed
+        String kode = jTxtMasukanKode.getText();
+        Booking booking = new Booking();
+        booking.setNama(jTxtNamaPemesan1.getText());
+        booking.setTgl(jTxtTanggalPesan1.getText());
+        booking.setJam(jTxtJam1.getText());
+        booking.setDurasi(Integer.parseInt(jTxtDurasi3.getText()));
+        booking.setJenis(jTxtJenis.getText());
+        booking.setDetail(jTxtPaket.getText());
+        booking.setFnd(jTextArea1.getText());
+
+        if (controller.updateBooking(kode, booking)) {
+            JOptionPane.showMessageDialog(this, "Data berhasil diupdate!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Gagal mengupdate data!");
+        }
+    }//GEN-LAST:event_jBtnUpdateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
