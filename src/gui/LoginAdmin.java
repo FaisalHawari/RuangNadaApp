@@ -1,24 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 package gui;
 
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author fahaw
- */
+
 public class LoginAdmin extends javax.swing.JDialog {
 
-    /** Creates new form LoginAdmin */
+    private Main parent;
     
     public LoginAdmin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.parent = (Main) parent;
+        this.setLocationRelativeTo(parent);
     }
 
     /** This method is called from within the constructor to
@@ -39,17 +34,17 @@ public class LoginAdmin extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Login Admin");
         setBackground(new java.awt.Color(5, 2, 5));
-        setPreferredSize(new java.awt.Dimension(420, 320));
+        setPreferredSize(new java.awt.Dimension(420, 350));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jLabel1.setText("Password");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
+        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jLabel1.setText("Password :");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jLabel2.setText("Username");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
-        getContentPane().add(jTextUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 200, 40));
+        jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jLabel2.setText("Username :");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
+        getContentPane().add(jTextUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 200, 40));
 
         jBtnLogin.setText("Login");
         jBtnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -57,14 +52,14 @@ public class LoginAdmin extends javax.swing.JDialog {
                 jBtnLoginActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 100, 50));
+        getContentPane().add(jBtnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, 140, 40));
 
         jTextPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextPasswordActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 200, 40));
+        getContentPane().add(jTextPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 200, 40));
 
         pack();
         setLocationRelativeTo(null);
@@ -78,8 +73,7 @@ public class LoginAdmin extends javax.swing.JDialog {
         if (username.equals("admin") && password.equals("admin123")) {
             JOptionPane.showMessageDialog(this, "Login Berhasil!", "Sukses", JOptionPane.INFORMATION_MESSAGE);
 
-            ((Main) getParent()).loginSebagaiAdmin();
-
+            parent.loginSebagaiAdmin();
             dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Username atau Password salah!", "Login Gagal", JOptionPane.ERROR_MESSAGE);

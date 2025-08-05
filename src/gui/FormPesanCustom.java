@@ -225,7 +225,13 @@ public class FormPesanCustom extends javax.swing.JPanel {
             if (jChBoxFishnChip.isSelected()) { fnb.append("Fish n Chip, "); totalHarga += 25000; }
             if (jChBoxMangoJuice.isSelected()) { fnb.append("Mango Juice, "); totalHarga += 15000; }
 
-            booking.setFnd(fnb.length() > 0 ? fnb.substring(0, fnb.length() - 2) : "Tidak ada");
+            
+            if (fnb.length() > 0) {
+            booking.setFnd(fnb.substring(0, fnb.length() - 2));
+            }else {
+            booking.setFnd("Tidak ada");
+            }
+            
             booking.setTotal(totalHarga);
             
             String kodeBooking = controller.createBooking(booking);
