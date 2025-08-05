@@ -47,8 +47,8 @@ public class FormPesanCustom extends javax.swing.JPanel {
         jCmbRoom = new javax.swing.JComboBox<>();
         jTextDurasi = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jBtnReset = new javax.swing.JButton();
+        jBtnPesan = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jChBoxMangoJuice = new javax.swing.JCheckBox();
         jChBoxIceTea = new javax.swing.JCheckBox();
@@ -111,27 +111,27 @@ public class FormPesanCustom extends javax.swing.JPanel {
         jLabel11.setText("Durasi");
         add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 50, 30));
 
-        jButton1.setBackground(new java.awt.Color(165, 106, 219));
-        jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(227, 227, 227));
-        jButton1.setText("Reset");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBtnReset.setBackground(new java.awt.Color(165, 106, 219));
+        jBtnReset.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jBtnReset.setForeground(new java.awt.Color(227, 227, 227));
+        jBtnReset.setText("Reset");
+        jBtnReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBtnResetActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 640, 120, 40));
+        add(jBtnReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 640, 120, 40));
 
-        jButton2.setBackground(new java.awt.Color(165, 106, 219));
-        jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(227, 227, 227));
-        jButton2.setText("Pesan");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jBtnPesan.setBackground(new java.awt.Color(165, 106, 219));
+        jBtnPesan.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jBtnPesan.setForeground(new java.awt.Color(227, 227, 227));
+        jBtnPesan.setText("Pesan");
+        jBtnPesan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jBtnPesanActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 640, 120, 40));
+        add(jBtnPesan, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 640, 120, 40));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Semibold", 0, 16)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(231, 219, 239));
@@ -173,7 +173,7 @@ public class FormPesanCustom extends javax.swing.JPanel {
         add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 770));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jBtnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnResetActionPerformed
         jTextNama.setText("");
         jTextNoTelp.setText("");
         jTextTanggal.setText("");
@@ -183,10 +183,9 @@ public class FormPesanCustom extends javax.swing.JPanel {
         jChBoxIceTea.setSelected(false);
         jChBoxFishnChip.setSelected(false);
         jChBoxMangoJuice.setSelected(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jBtnResetActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // Langkah 1: Validasi input (dilakukan di dalam View)
+    private void jBtnPesanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesanActionPerformed
         if (jTextNama.getText().trim().isEmpty() || 
             jTextNoTelp.getText().trim().isEmpty() ||
             jTextTanggal.getText().trim().isEmpty() ||
@@ -197,13 +196,12 @@ public class FormPesanCustom extends javax.swing.JPanel {
         }
         
         try {
-            int durasi = Integer.parseInt(jTextDurasi.getText());
+            int durasi = Integer.valueOf(jTextDurasi.getText());
             if (durasi <= 0) {
                 JOptionPane.showMessageDialog(this, "Durasi harus lebih dari 0!", "Input Tidak Valid", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
-            // Langkah 2: Buat objek model 'Booking' dan isi dengan data dari form
             Booking booking = new Booking();
             booking.setNama(jTextNama.getText());
             booking.setTlp(jTextNoTelp.getText());
@@ -213,7 +211,6 @@ public class FormPesanCustom extends javax.swing.JPanel {
             booking.setJenis("Custom");
             booking.setDetail((String) jCmbRoom.getSelectedItem());
             
-            // Logika kalkulasi harga dan F&B
             StringBuilder fnb = new StringBuilder();
             int totalHarga = 0;
             
@@ -228,26 +225,14 @@ public class FormPesanCustom extends javax.swing.JPanel {
             if (jChBoxFishnChip.isSelected()) { fnb.append("Fish n Chip, "); totalHarga += 25000; }
             if (jChBoxMangoJuice.isSelected()) { fnb.append("Mango Juice, "); totalHarga += 15000; }
 
-            // Hapus koma terakhir jika ada
             booking.setFnd(fnb.length() > 0 ? fnb.substring(0, fnb.length() - 2) : "Tidak ada");
             booking.setTotal(totalHarga);
             
-            // Langkah 3: Kirim objek 'booking' yang sudah lengkap ke controller
             String kodeBooking = controller.createBooking(booking);
             
-            // Langkah 4: Tampilkan hasil ke pengguna
-            if (kodeBooking != null) {
+             if (kodeBooking != null) {
                 JOptionPane.showMessageDialog(this, "Booking berhasil! Simpan kode booking Anda:\n" + kodeBooking, "Sukses", JOptionPane.INFORMATION_MESSAGE);
-                // Kosongkan field setelah berhasil
-                jTextNama.setText("");
-                jTextNoTelp.setText("");
-                jTextTanggal.setText("");
-                jTextJam.setText("");
-                jTextDurasi.setText("");
-                jCmbRoom.setSelectedIndex(0);
-                jChBoxIceTea.setSelected(false);
-                jChBoxFishnChip.setSelected(false);
-                jChBoxMangoJuice.setSelected(false);
+                jBtnResetActionPerformed(null);
             } else {
                 JOptionPane.showMessageDialog(this, "Gagal melakukan booking! Periksa koneksi dan log server.", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -255,7 +240,7 @@ public class FormPesanCustom extends javax.swing.JPanel {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Input durasi harus berupa angka!", "Input Tidak Valid", JOptionPane.WARNING_MESSAGE);
         }               
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jBtnPesanActionPerformed
 
     private void jChBoxMangoJuiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChBoxMangoJuiceActionPerformed
         // TODO add your handling code here:
@@ -271,8 +256,8 @@ public class FormPesanCustom extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jBtnPesan;
+    private javax.swing.JButton jBtnReset;
     private javax.swing.JCheckBox jChBoxFishnChip;
     private javax.swing.JCheckBox jChBoxIceTea;
     private javax.swing.JCheckBox jChBoxMangoJuice;

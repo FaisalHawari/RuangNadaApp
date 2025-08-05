@@ -31,7 +31,6 @@ private BookingController controller;
         initTableModel();
         loadTableData();
 
-        // Tambahkan listener untuk me-refresh data saat panel ini ditampilkan
         this.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentShown(ComponentEvent e) {
@@ -39,6 +38,8 @@ private BookingController controller;
             }
         });
     }
+    
+    
      private void initTableModel() {
         model = new DefaultTableModel();
         model.addColumn("Id");
@@ -58,7 +59,7 @@ private BookingController controller;
 
     
     public void loadTableData() {
-        model.setRowCount(0); // Kosongkan tabel sebelum diisi
+        model.setRowCount(0);
 
         List<Booking> bookings = controller.getAllBookings();
         if (bookings != null) {

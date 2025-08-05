@@ -57,7 +57,7 @@ public class BookingController {
 
     public List<Booking> getAllBookings() {
         List<Booking> bookingList = new ArrayList<>();
-        String sql = "SELECT * FROM bookings ORDER BY Id ASC"; // Diubah dari DESC menjadi ASC
+        String sql = "SELECT * FROM bookings ORDER BY Id ASC";
         
         try (Connection conn = Koneksi.getKoneksi();
              Statement stmt = conn.createStatement();
@@ -85,7 +85,6 @@ public class BookingController {
         return bookingList;
     }
 
-    // ... (Metode getBookingByCode, updateBooking, deleteBooking tetap sama)
     public Booking getBookingByCode(String kode) {
         String sql = "SELECT * FROM bookings WHERE Kode = ?";
         try (Connection conn = Koneksi.getKoneksi();

@@ -59,8 +59,8 @@ public class FormPesanBundle extends javax.swing.JPanel {
         jCmbBundle = new javax.swing.JComboBox<>();
         jTextDurasi = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jBtnReset = new javax.swing.JButton();
+        jBtnPesan = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jChBoxIceTea = new javax.swing.JCheckBox();
         jChBoxFishnChip = new javax.swing.JCheckBox();
@@ -122,30 +122,30 @@ public class FormPesanBundle extends javax.swing.JPanel {
 
         jLabel11.setFont(new java.awt.Font("Segoe UI Semibold", 0, 16)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(231, 219, 239));
-        jLabel11.setText("Durasi");
-        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 50, 30));
+        jLabel11.setText("Durasi (isi 0 jika tidak)");
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 160, 30));
 
-        jButton1.setBackground(new java.awt.Color(165, 106, 219));
-        jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(227, 227, 227));
-        jButton1.setText("Reset");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBtnReset.setBackground(new java.awt.Color(165, 106, 219));
+        jBtnReset.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jBtnReset.setForeground(new java.awt.Color(227, 227, 227));
+        jBtnReset.setText("Reset");
+        jBtnReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBtnResetActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 640, 120, 40));
+        add(jBtnReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 640, 120, 40));
 
-        jButton2.setBackground(new java.awt.Color(165, 106, 219));
-        jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(227, 227, 227));
-        jButton2.setText("Pesan");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jBtnPesan.setBackground(new java.awt.Color(165, 106, 219));
+        jBtnPesan.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jBtnPesan.setForeground(new java.awt.Color(227, 227, 227));
+        jBtnPesan.setText("Pesan");
+        jBtnPesan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jBtnPesanActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 640, 120, 40));
+        add(jBtnPesan, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 640, 120, 40));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Semibold", 0, 16)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(231, 219, 239));
@@ -188,7 +188,7 @@ public class FormPesanBundle extends javax.swing.JPanel {
         add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 770));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jBtnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnResetActionPerformed
         jTextNama.setText("");
         jTextNoTelp.setText("");
         jTextTanggal.setText("");
@@ -198,9 +198,9 @@ public class FormPesanBundle extends javax.swing.JPanel {
         jChBoxIceTea.setSelected(false);
         jChBoxFishnChip.setSelected(false);
         jChBoxMangoJuice.setSelected(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jBtnResetActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jBtnPesanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesanActionPerformed
         if (jTextNama.getText().trim().isEmpty() || jTextNoTelp.getText().trim().isEmpty() ||
             jTextTanggal.getText().trim().isEmpty() || jTextJam.getText().trim().isEmpty() ||
             jTextDurasi.getText().trim().isEmpty()) {
@@ -210,10 +210,7 @@ public class FormPesanBundle extends javax.swing.JPanel {
 
         try {
             int durasi = Integer.parseInt(jTextDurasi.getText());
-            if (durasi <= 0) {
-                JOptionPane.showMessageDialog(this, "Durasi harus lebih dari 0!", "Input Tidak Valid", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
+            
 
             Booking booking = new Booking();
             booking.setNama(jTextNama.getText());
@@ -231,20 +228,20 @@ public class FormPesanBundle extends javax.swing.JPanel {
 
             switch (selectedBundle) {
                 case "Family 1":
-                    totalHarga = 120000;
-                    fnbBundle = "Room Small (2 Jam), 1 Pitcher Ice Tea, 1 Calamary, 1 Fish n Chip";
+                    totalHarga = 125000;
+                    fnbBundle = "1 Pitcher Ice Tea, 1 Calamary, 1 Fish n Chip";
                     break;
                 case "Family 2":
                     totalHarga = 175000;
-                    fnbBundle = "Room Medium (2 Jam), 1 Pitcher Ice Tea, 2 Glass Mango Juice, 1 Calamary, 1 Fish n Chip";
+                    fnbBundle = "1 Pitcher Ice Tea, 2 Glass Mango Juice, 1 Calamary, 1 Fish n Chip";
                     break;
                 case "Family 3":
-                    totalHarga = 250000;
-                    fnbBundle = "Room Large (2 Jam), 2 Pitcher Ice Tea, 2 Mix Platter";
+                    totalHarga = 230000;
+                    fnbBundle = "2 Pitcher Ice Tea, 2 Mix Platter";
                     break;
                 case "Family 4":
-                    totalHarga = 350000;
-                    fnbBundle = "Room VIP (2 Jam), 2 Pitcher Orange Juice, 2 Mix Platter";
+                    totalHarga = 275000;
+                    fnbBundle = "2 Pitcher Orange Juice, 2 Mix Platter";
                     break;
             }
 
@@ -258,13 +255,17 @@ public class FormPesanBundle extends javax.swing.JPanel {
             } else {
                 booking.setFnd(fnbBundle);
             }
+            int durasiTambah = 35000;
+            int biayaTambahDurasi = durasiTambah * durasi;
+            totalHarga += biayaTambahDurasi;
+            
             booking.setTotal(totalHarga);
 
             String kodeBooking = controller.createBooking(booking);
             
             if (kodeBooking != null) {
                 JOptionPane.showMessageDialog(this, "Booking bundle berhasil! Simpan kode booking Anda:\n" + kodeBooking, "Sukses", JOptionPane.INFORMATION_MESSAGE);
-                jButton1ActionPerformed(null); // Panggil aksi reset
+                jBtnResetActionPerformed(null);
             } else {
                 JOptionPane.showMessageDialog(this, "Gagal melakukan booking!", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -272,7 +273,7 @@ public class FormPesanBundle extends javax.swing.JPanel {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Input durasi harus berupa angka!", "Input Tidak Valid", JOptionPane.WARNING_MESSAGE);
         }                 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jBtnPesanActionPerformed
 
     private void jChBoxIceTeaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChBoxIceTeaActionPerformed
         // TODO add your handling code here:
@@ -288,8 +289,8 @@ public class FormPesanBundle extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jBtnPesan;
+    private javax.swing.JButton jBtnReset;
     private javax.swing.JCheckBox jChBoxFishnChip;
     private javax.swing.JCheckBox jChBoxIceTea;
     private javax.swing.JCheckBox jChBoxMangoJuice;

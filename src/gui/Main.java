@@ -339,13 +339,13 @@ public class Main extends javax.swing.JFrame {
         );
 
         if (jawab == JOptionPane.YES_OPTION) {
-            System.exit(0); // Keluar dari aplikasi
+            System.exit(0); 
         } 
     }//GEN-LAST:event_jBtnKeluarActionPerformed
 
     private void jBtnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdminActionPerformed
         // TODO add your handling code here:
-        LoginAdmin login = new LoginAdmin(this, true); // kirim Main sebagai parent
+        LoginAdmin login = new LoginAdmin(this, true); 
         login.setVisible(true);
         
     }//GEN-LAST:event_jBtnAdminActionPerformed
@@ -379,8 +379,8 @@ public class Main extends javax.swing.JFrame {
         );
 
         if (jawab == JOptionPane.YES_OPTION) {
-            logoutAdmin(); // kembali ke menu biasa
-            setMenuView(); // kembali ke home
+            logoutAdmin(); 
+            setMenuView(); 
         }
     }//GEN-LAST:event_jBtnLogoutActionPerformed
 

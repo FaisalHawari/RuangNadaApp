@@ -78,10 +78,9 @@ public class LoginAdmin extends javax.swing.JDialog {
         if (username.equals("admin") && password.equals("admin123")) {
             JOptionPane.showMessageDialog(this, "Login Berhasil!", "Sukses", JOptionPane.INFORMATION_MESSAGE);
 
-            // Panggil Main dan ubah menu
             ((Main) getParent()).loginSebagaiAdmin();
 
-            dispose(); // Tutup dialog login
+            dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Username atau Password salah!", "Login Gagal", JOptionPane.ERROR_MESSAGE);
         }
